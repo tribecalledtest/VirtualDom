@@ -12,12 +12,11 @@ class VDOM {
     createClass(displayName, options) {
         if (!displayName) throw new Error("display name was not specified");
 
-        let _VDOM = this;
-        return function createComponent(attrs, children) {
+        return (attrs, children) => {
             let component = new VClass(displayName, options, attrs, children);
 
             if (component.setState) {
-                return _VDOM.setState(component);
+                return this.setState(component);
             }
 
             return component.render();
@@ -28,15 +27,15 @@ class VDOM {
         let vDom = component.render();
 
         // attach the state object on any of the events that are tied to each virtual DOM
-        function attachState(x) {
+        let attachState = (x) => {
             if ((x instanceof Object) && x.events) {
                 Object.keys(x.events).forEach((eventKey) => {
                     let func = x.events[eventKey];
 
-                    x.events[eventKey] = function(event) {
+                    x.events[eventKey] = (event) => {
                         func.call(component, event);
                         let newVdom = component.render();
-                        _VDOM.diff(newVdom);
+                        this.diff(newVdom);
                     }
                 });
             }
@@ -50,7 +49,7 @@ class VDOM {
 
                 attachState(x.children);
             }
-        }
+        };
 
         attachState(vDom);
         return vDom;
@@ -71,7 +70,6 @@ class VDOM {
         // Find the difference between the existing DOM and new DOM. This function gets invoked whenever
         // eventHandler is triggered
         if (this.vdom) {
-            let dirtySets = [];
             function recurseDiff(x) {
                 if (x.constructor.name === 'VElement') {
                     if (helpers.match(x, newVDOM)) {

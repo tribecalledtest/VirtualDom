@@ -25,13 +25,35 @@ gulp.task('compileJS', function() {
         .pipe(gulp.dest('./public/'));
 });
 
+gulp.task('compileSolutionJS', function() {
+    var b = browserify();
+    b.add('./solution/workshop.js');
+
+    b.transform(babelify);
+
+    b.bundle()
+        .pipe(source('main.js'))
+        .pipe(buffer())
+        .pipe(gulp.dest('./public/'));
+});
+
 
 // ------------------------------------------------------
 gulp.task('default', function() {
     runSeq('compileJS', 'testBrowserJs');
 
-    gulp.watch('solution/**/*.js', function() {
+    gulp.watch('VDOM/**/*.js', function() {
         runSeq('compileJS');
     });
 });
+
+// ------------------------------------------------------
+gulp.task('solution', function() {
+    runSeq('compileSolutionJS', 'testBrowserJs');
+
+    gulp.watch('solution/**/*.js', function() {
+        runSeq('compileSolutionJS');
+    });
+});
+
 
