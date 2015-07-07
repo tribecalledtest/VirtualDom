@@ -30,7 +30,7 @@ gulp.task('compileJS', function() {
 gulp.task('default', function() {
     runSeq('compileJS', 'testBrowserJs');
 
-    gulp.watch('solution/**/*.js', function() {
+    gulp.watch('VDOM/**/*.js', function() {
         runSeq('compileJS');
     });
 });
