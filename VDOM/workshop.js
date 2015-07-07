@@ -1,0 +1,1 @@
+window.VDOM = require('./VDOM');

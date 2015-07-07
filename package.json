@@ -1,0 +1,33 @@
+{
+  "name": "VirtualDom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.0.0",
+    "gulp": "^3.9.0",
+    "gulp-util": "^3.0.5",
+    "karma": "^0.12.36",
+    "karma-chai": "^0.1.0",
+    "karma-jquery": "^0.1.0",
+    "karma-mocha": "^0.1.10",
+    "karma-phantomjs-launcher": "^0.2.0",
+    "karma-sinon": "^1.0.4",
+    "mocha": "^2.2.5",
+    "phantomjs": "^1.9.17",
+    "sinon": "^1.15.3"
+  },
+  "dependencies": {
+    "babelify": "^6.1.2",
+    "browserify": "^10.2.4",
+    "growl": "^1.8.1",
+    "run-sequence": "^1.1.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
