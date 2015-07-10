@@ -128,12 +128,10 @@ describe('VDOM\'s createClass functionality', function() {
             VDOM.createElement('p', null, 'WORLD!')
         ]);
 
-        VDOM.render(vElem, $('#test-container')[0]);
-
-        expect($('p').length).to.equal(2);
-        expect($('.custom-container').hasClass('another-class')).to.be.true;
-        expect($('p').eq(0).text()).to.equal('Hello,');
-        expect($('p').eq(1).text()).to.equal('WORLD!');
+        expect(vElem.children.length).to.equal(2);
+        expect(vElem.attrs.className).to.equal('another-class');
+        expect(vElem.children[0].children).to.equal('Hello,');
+        expect(vElem.children[1].children).to.equal('WORLD!');
     });
 });
 
